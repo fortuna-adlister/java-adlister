@@ -51,6 +51,17 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
+    public void deleteAd(int id) {
+        // FILL THIS IN
+    }
+
+    @Override
+    public Ad editAd(Ad ad) {
+        // FILL THIS IN
+        return null;
+    }
+
+    @Override
     public Ad individualAd(int id) {
         String query = "SELECT * FROM ads WHERE id = ? LIMIT 1";
         try {
@@ -68,6 +79,7 @@ public class MySQLAdsDao implements Ads {
             + "(" + ad.getUserId() + ", "
             + "'" + ad.getTitle() +"', "
             + "'" + ad.getDescription() + "')";
+            // add categories?
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
@@ -76,6 +88,7 @@ public class MySQLAdsDao implements Ads {
             rs.getLong("user_id"),
             rs.getString("title"),
             rs.getString("description")
+            // add categories?
         );
     }
 

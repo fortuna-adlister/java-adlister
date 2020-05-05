@@ -4,16 +4,23 @@ public class User {
     private long id;
     private String username;
     private String email;
-    private String password;
+    private String hash;
 
     public User() {}
 
-    public User(long id, String username, String email, String password) {
-        this.id = id;
+    public User(String username, String email, String hash) {
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.hash = hash; // replaced all "password"s with "hash"
     }
+
+//    public User(long id, String username, String email, String password) {
+//        this.id = id;
+//        this.username = username;
+//        this.email = email;
+//        this.password = password;
+//    }
+
 
     public long getId() {
         return id;
@@ -39,11 +46,11 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getHash() {
+        return hash;
+    } // replaced all "password"s with "hash"
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setHash(String hash) {
+        this.hash = hash;
+    } // replaced all "password"s with "hash"
 }
