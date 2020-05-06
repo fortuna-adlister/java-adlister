@@ -63,7 +63,7 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public Ad editTitle(Long id) {
+    public Ad editTitle(long id) {
         String query = "UPDATE ads SET title=? WHERE id=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
@@ -77,7 +77,7 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public Ad editDescription(Long id) {
+    public Ad editDescription(long id) {
         String query = "UPDATE ads SET description=? WHERE id=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
@@ -90,8 +90,8 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-    @Override //NEED TO CORRECT
-    public Ad editCategories(Long id) {
+    @Override
+    public Ad editCategories(long id) {
         String query = "UPDATE ad_categories SET cat=? WHERE id=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
@@ -105,11 +105,11 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public Ad individualAd(int id) {
+    public Ad individualAd(long id) {
         String query = "SELECT * FROM ads WHERE id = ? LIMIT 1";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setInt(1, id);
+            stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
             return extractAd(rs);
         } catch (SQLException e) {
