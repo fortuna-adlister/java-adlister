@@ -118,11 +118,12 @@ public class MySQLAdsDao implements Ads {
     }
 
     private String createInsertQuery(Ad ad) {
-        return "INSERT INTO ads(user_id, title, description) VALUES "
+        return "INSERT INTO ads(user_id, title, description, categories) VALUES "
             + "(" + ad.getUserId() + ", "
             + "'" + ad.getTitle() +"', "
-            + "'" + ad.getDescription() + "')";
-            // add categories?
+            + "'" + ad.getDescription() + "'"
+            + "'" + ad.getCategories() + "')";
+            // added categories, kinda, run JSP to further diagnose issue
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
@@ -130,8 +131,9 @@ public class MySQLAdsDao implements Ads {
             rs.getLong("id"),
             rs.getLong("user_id"),
             rs.getString("title"),
-            rs.getString("description")
-            // add categories?
+            rs.getString("description"),
+            rs.getString("categories")
+            // added categories, kinda, run JSP to further diagnose issue
         );
     }
 
