@@ -7,6 +7,7 @@ import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.codeup.adlister.Config;
 
@@ -106,18 +107,36 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    @Override
+    public ArrayList<String> getCategories() {
+        ArrayList<String> allCats = new ArrayList<>();
+        try {
 
+            String query = "SELECT * FROM categories";
 
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
 
+            while (rs.next()){
+                allCats.add(rs.getString("name"));
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return allCats;
+    }
 
 
     @Override
     public Ad individualAd(long id) {
+        System.out.println(id + " This is from line 133");
         String query = "SELECT * FROM ads WHERE id = ? LIMIT 1";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
+            rs.next();
             return extractAd(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error finding an ad by id", e);
@@ -134,19 +153,36 @@ public class MySQLAdsDao implements Ads {
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
+        ArrayList<String> catStrings = extractCategories(rs.getLong("id"));
+
         return new Ad(
             rs.getLong("id"),
             rs.getLong("user_id"),
             rs.getString("title"),
             rs.getString("description"),
-            rs.getString("categories")
-            // added categories, kinda, run JSP to further diagnose issue
+            extractCategories(rs.getLong("id"))
         );
     }
 
-    private List<Long> extractCategories(long adId){
+    private ArrayList<String> extractCategories(long adId) throws SQLException {
         String query = "SELECT cat_id FROM ad_categories WHERE ad_id = " + adId;
-        Statement stmt =
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+
+        ArrayList<String> theseCats = new ArrayList<>();
+        while (rs.next()){
+            long catId = rs.getLong("cat_id");
+
+            String queryCat = "SELECT name FROM categories WHERE id = " + catId;
+            Statement stmtCat = connection.createStatement();
+            ResultSet rsCat = stmt.executeQuery(query);
+
+            while (rs.next()){
+                theseCats.add(rs.getString("name"));
+            }
+
+        }
+        return theseCats;
     }
 
     private List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {

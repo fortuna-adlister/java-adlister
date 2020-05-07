@@ -2,6 +2,7 @@ package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Ads { //Ads DAO Interface
@@ -22,6 +23,8 @@ public interface Ads { //Ads DAO Interface
     Ad editCategories (long id);
 
 
+    // Get categories
+    ArrayList<String> getCategories();
 
     //get ad that user has chosen
     Ad individualAd (long id);

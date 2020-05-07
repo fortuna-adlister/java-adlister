@@ -18,13 +18,23 @@
             <label for="description">Description</label>
             <textarea id="description" name="description" class="form-control" type="text"></textarea>
         </div>
+        <input type="hidden" value="${ad.id}" name="id">
+
+
         <div class="form-group">
 
-            <c:forEach var="cat" items="${all}">
-                <div class="col-md-6">
-                    <p>${cat.name}</p>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <c:forEach var="cat" items="${categories}">
+                        <div class="input-group-text"> ${cat}
+                            <input type="checkbox" aria-label="Checkbox for following text input">
+                        </div>
+                    </c:forEach>
                 </div>
-            </c:forEach>
+            </div>
+
+
         </div>
 
         <input type="submit" class="btn btn-block btn-primary">
@@ -33,3 +43,5 @@
 </div>
 </body>
 </html>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
