@@ -21,6 +21,8 @@ public interface Ads { //Ads DAO Interface
 
     Ad editCategories (long id);
 
+
+
     //get ad that user has chosen
     Ad individualAd (long id);
 }

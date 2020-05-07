@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import com.codeup.adlister.Config;
 
+import javax.management.Query;
+
 public class MySQLAdsDao implements Ads {
     private Connection connection;
 
@@ -104,6 +106,11 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+
+
+
+
+
     @Override
     public Ad individualAd(long id) {
         String query = "SELECT * FROM ads WHERE id = ? LIMIT 1";
@@ -135,6 +142,11 @@ public class MySQLAdsDao implements Ads {
             rs.getString("categories")
             // added categories, kinda, run JSP to further diagnose issue
         );
+    }
+
+    private List<Long> extractCategories(long adId){
+        String query = "SELECT cat_id FROM ad_categories WHERE ad_id = " + adId;
+        Statement stmt =
     }
 
     private List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {
