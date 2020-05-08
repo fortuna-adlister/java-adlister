@@ -42,17 +42,49 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public Long insert(Ad ad) {
+    public Ad getById(long id){
+        PreparedStatement stmt = null;
         try {
-            Statement stmt = connection.createStatement();
-            stmt.executeUpdate(createInsertQuery(ad), Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-            return rs.getLong(1);
+            stmt = connection.prepareStatement("SELECT * FROM ads where id = ?");
+            stmt.setLong(1,id);
+            ResultSet rs = stmt.executeQuery();
+//            rs.next();
+//            return extractAd(rs);
+            return createAdsFromResults(rs).get(0);
         } catch (SQLException e) {
-            throw new RuntimeException("Error creating a new ad.", e);
+            throw new RuntimeException("Error retrieving ad id=" +id, e);
         }
+
     }
+
+//    @Override
+//    public Long insert(Ad ad) {
+//        try {
+//            Statement stmt = connection.createStatement();
+//            stmt.executeUpdate(createInsertQuery(ad), Statement.RETURN_GENERATED_KEYS);
+//            ResultSet rs = stmt.getGeneratedKeys();
+//            rs.next();
+//            return rs.getLong(1);
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error creating a new ad.", e);
+//        }
+//    }
+@Override
+public Long insert(Ad ad) {
+    try {
+        String insertQuery = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
+        PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+        stmt.setLong(1, ad.getUserId());
+        stmt.setString(2, ad.getTitle());
+        stmt.setString(3, ad.getDescription());
+        stmt.executeUpdate();
+        ResultSet rs = stmt.getGeneratedKeys();
+        rs.next();
+        return rs.getLong(1);
+    } catch (SQLException e) {
+        throw new RuntimeException("Error creating a new ad.", e);
+    }
+}
 
     @Override
     public void deleteAd(long id) {

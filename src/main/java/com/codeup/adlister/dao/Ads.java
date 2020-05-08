@@ -9,6 +9,9 @@ public interface Ads { //Ads DAO Interface
     // View (all) ads
     List<Ad> all();
 
+    // get a single ad by id
+    Ad getById(long id);
+
     // Create a new ad and return the new ad's id
     Long insert(Ad ad);
 
