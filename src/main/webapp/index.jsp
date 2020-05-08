@@ -149,7 +149,7 @@
 <body>
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <div class="container">
-        <h1>GREG'S LIST!</h1>
+        <h1>GERG'S LIST!</h1>
 
         <div id="face">
             <div id="leftEye"></div>
