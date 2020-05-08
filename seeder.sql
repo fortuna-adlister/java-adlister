@@ -39,6 +39,17 @@ VALUES ('For Sale'),
        ('Musician'),
        ('Domestic');
 
+INSERT INTO users(username, email, password)
+VALUES ('bobSchwab', 'bs@email.com','bob'),
+       ('peterPan', 'pp@email.com','pete'),
+       ('drdoom', 'doom@email.com','doom'),
+       ('sonic', 'sanic@email.com','sonice'),
+       ('knuckles', 'k@email.com','dawae'),
+       ('alpacaFarm', 'as@email.com','paca'),
+       ('TomCruise', 'scientologys@email.com','MI3'),
+       ('Rick', 'ricks@email.com','rick'),
+       ('Morty', 'morty@email.com','morty');
+
 INSERT INTO ads(user_id, title, description)
 VALUES (1,'Blade','The first blade'),
        (2,'Blade II','The second blade'),

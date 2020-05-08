@@ -95,7 +95,7 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public Ad editCategories(long id) {
-        String query = "UPDATE ad_categories SET cat=? WHERE id=?";
+        String query = "UPDATE ad_categories SET cat_id=? WHERE ad_id=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, "password"); //we'll have to replace hard-coded string username with input on whatever form we're using to let user do it
